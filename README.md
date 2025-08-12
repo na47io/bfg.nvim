@@ -44,7 +44,7 @@ use {
 }
 ```
 
-## Default Configuration
+## default configuration
 
 ```lua
 require('bfg').setup({
@@ -60,7 +60,7 @@ require('bfg').setup({
 })
 ```
 
-## Extras
+## extras
 
 Additional configurations for other applications can be found in the `extras/` folder:
 
@@ -68,7 +68,7 @@ Additional configurations for other applications can be found in the `extras/` f
 - **tmux** - Status line configuration  
 - **lazygit** - Git TUI theme
 
-## Contributing
+## contributing
 
 Pull requests are welcome! Feel free to submit themes for additional applications, improvements to the existing colorscheme, or bug fixes.
 
