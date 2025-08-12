@@ -1,5 +1,7 @@
 # black forest gateau
 
+<img width="3116" height="1992" alt="image" src="https://github.com/user-attachments/assets/bec4fd16-975b-455e-ac48-079441d3ada6" />
+
 A minimal, calming Neovim colorscheme with muted greens and yellows. Inspired by Jonathan Blow's programming environment - to me it means taking programming seriously. Nothing is more serious than a [Black Forest Gateau](https://en.wikipedia.org/wiki/Black_Forest_gateau).
 
 ## installation
