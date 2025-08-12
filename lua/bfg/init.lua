@@ -8,6 +8,10 @@ local colors = {
 	green = "#6b8b6b",
 	yellow = "#d4d4aa",
 	red = "#d75f5f",
+	white = "#ffffff",
+	teal = "#90E0D6",
+	light_green = "#A8EFAB",
+	bright_green = "#3fdf1f",
 
 	-- UI colors
 	bg_soft = "#213131",
@@ -70,29 +74,48 @@ local function apply_colorscheme()
 		EndOfBuffer = { bg = bg },
 
 		-- Syntax highlighting
-		Comment = { fg = palette.green, italic = M.config.italic.comments },
+		Comment = { fg = palette.bright_green, italic = M.config.italic.comments },
 		String = { fg = palette.yellow, italic = M.config.italic.strings },
-		Number = { fg = palette.fg },
+		Number = { fg = palette.teal },
 		Boolean = { fg = palette.fg },
 		Character = { fg = palette.fg },
 		Constant = { fg = palette.fg },
 		Keyword = { fg = palette.fg },
 		Function = { fg = palette.fg },
-		Type = { fg = palette.fg },
+		Type = { fg = palette.light_green },
 		Identifier = { fg = palette.fg },
 		Operator = { fg = palette.fg },
 		Delimiter = { fg = palette.fg },
 		PreProc = { fg = palette.fg },
 		Special = { fg = palette.fg },
-		Statement = { fg = palette.fg },
-		Conditional = { fg = palette.fg },
+		Statement = { fg = palette.white },
+		Conditional = { fg = palette.white },
 		Exception = { fg = palette.fg },
 		Include = { fg = palette.fg },
 		Label = { fg = palette.fg },
-		Repeat = { fg = palette.fg },
+		Repeat = { fg = palette.white },
 		StorageClass = { fg = palette.fg },
 		Structure = { fg = palette.fg },
 		Typedef = { fg = palette.fg },
+
+		-- Additional syntax groups that might be missing
+		Error = { fg = palette.red },
+		Todo = { fg = palette.yellow },
+		Debug = { fg = palette.fg },
+		Define = { fg = palette.fg },
+		Macro = { fg = palette.fg },
+		PreCondit = { fg = palette.fg },
+		Tag = { fg = palette.fg },
+		SpecialChar = { fg = palette.fg },
+		SpecialComment = { fg = palette.bright_green },
+		Underlined = { fg = palette.fg, underline = true },
+
+		-- Force common fallback groups
+		Variable = { fg = palette.fg },
+		Parameter = { fg = palette.fg },
+		Member = { fg = palette.fg },
+		Property = { fg = palette.fg },
+		Field = { fg = palette.fg },
 
 		-- UI elements
 		LineNr = { fg = palette.gray, bg = bg },
@@ -116,6 +139,7 @@ local function apply_colorscheme()
 		DiagnosticWarn = { fg = palette.yellow },
 		DiagnosticInfo = { fg = palette.green },
 		DiagnosticHint = { fg = palette.green },
+		DiagnosticUnnecessary = { fg = palette.green },
 		DiagnosticFloatingError = { fg = palette.fg, bg = palette.bg_float },
 		DiagnosticFloatingWarn = { fg = palette.yellow, bg = palette.bg_float },
 		DiagnosticFloatingInfo = { fg = palette.green, bg = palette.bg_float },
@@ -129,41 +153,22 @@ local function apply_colorscheme()
 
 		-- Treesitter
 		["@variable"] = { fg = palette.fg },
-		["@variable.builtin"] = { fg = palette.fg },
-		["@variable.parameter"] = { fg = palette.fg },
-		["@variable.member"] = { fg = palette.fg },
-		["@constant"] = { fg = palette.fg },
-		["@constant.builtin"] = { fg = palette.fg },
-		["@constant.macro"] = { fg = palette.fg },
-		["@string"] = { fg = palette.yellow, italic = M.config.italic.strings },
-		["@string.escape"] = { fg = palette.fg },
-		["@character"] = { fg = palette.fg },
-		["@number"] = { fg = palette.fg },
-		["@boolean"] = { fg = palette.fg },
-		["@function"] = { fg = palette.fg },
-		["@function.builtin"] = { fg = palette.fg },
-		["@function.macro"] = { fg = palette.fg },
-		["@parameter"] = { fg = palette.fg },
-		["@method"] = { fg = palette.fg },
-		["@field"] = { fg = palette.fg },
-		["@property"] = { fg = palette.fg },
-		["@constructor"] = { fg = palette.fg },
-		["@conditional"] = { fg = palette.fg },
-		["@repeat"] = { fg = palette.fg },
-		["@label"] = { fg = palette.fg },
-		["@operator"] = { fg = palette.fg },
-		["@keyword"] = { fg = palette.fg },
-		["@exception"] = { fg = palette.fg },
-		["@type"] = { fg = palette.fg },
-		["@type.builtin"] = { fg = palette.fg },
-		["@include"] = { fg = palette.fg },
-		["@punctuation.delimiter"] = { fg = palette.fg },
-		["@punctuation.bracket"] = { fg = palette.fg },
-		["@punctuation.special"] = { fg = palette.fg },
-		["@comment"] = { fg = palette.green, italic = M.config.italic.comments },
-		["@tag"] = { fg = palette.fg },
-		["@tag.attribute"] = { fg = palette.fg },
-		["@tag.delimiter"] = { fg = palette.fg },
+		
+		-- LSP Semantic Tokens - all fg
+		["@lsp.type.variable"] = { fg = palette.fg },
+		["@lsp.type.parameter"] = { fg = palette.fg },
+		["@lsp.type.property"] = { fg = palette.fg },
+		["@lsp.type.field"] = { fg = palette.fg },
+		["@lsp.type.function"] = { fg = palette.fg },
+		["@lsp.type.method"] = { fg = palette.fg },
+		["@lsp.type.class"] = { fg = palette.fg },
+		["@lsp.type.interface"] = { fg = palette.fg },
+		["@lsp.type.namespace"] = { fg = palette.fg },
+		["@lsp.type.type"] = { fg = palette.fg },
+		["@lsp.type.keyword"] = { fg = palette.fg },
+		["@lsp.type.string"] = { fg = palette.yellow },
+		["@lsp.type.comment"] = { fg = palette.fg },
+		["@lsp.type.builtInConstant"] = { fg = palette.teal },
 	}
 
 	-- Apply user overrides
@@ -179,6 +184,11 @@ local function apply_colorscheme()
 	for group, settings in pairs(groups) do
 		vim.api.nvim_set_hl(0, group, settings)
 	end
+
+	-- Force override any remaining white highlights
+	vim.api.nvim_set_hl(0, "Variable", { fg = palette.fg })
+	vim.api.nvim_set_hl(0, "Parameter", { fg = palette.fg })
+	vim.api.nvim_set_hl(0, "Member", { fg = palette.fg })
 
 	-- Set terminal colors
 	if M.config.terminal_colors then
