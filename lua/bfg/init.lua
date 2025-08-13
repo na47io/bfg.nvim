@@ -2,10 +2,11 @@ local M = {}
 
 -- Color palette
 local colors = {
-	bg = "#1a2b2b",
-	fg = "#c0c0c0",
+	bg = "#022B2B",
+	fg = "#C2BDA1",
 	gray = "#4a5a5a",
 	green = "#6b8b6b",
+	dark_teal = "#37C8BC",
 	yellow = "#d4d4aa",
 	red = "#d75f5f",
 	white = "#ffffff",
@@ -19,7 +20,7 @@ local colors = {
 	bg_statusline = "#2a3b3b",
 	bg_visual = "#2a4a4a",
 	bg_search = "#3a4a3a",
-	bg_float = "#2a3b3b",
+	bg_float = "#2B2B02",
 }
 
 -- Default config
@@ -74,8 +75,8 @@ local function apply_colorscheme()
 		EndOfBuffer = { bg = bg },
 
 		-- Syntax highlighting
-		Comment = { fg = palette.bright_green, italic = M.config.italic.comments },
-		String = { fg = palette.yellow, italic = M.config.italic.strings },
+		Comment = { fg = palette.bright_green, italic = true },
+		String = { fg = palette.dark_teal, italic = M.config.italic.strings },
 		Number = { fg = palette.teal },
 		Boolean = { fg = palette.fg },
 		Character = { fg = palette.fg },
@@ -106,6 +107,12 @@ local function apply_colorscheme()
 		Macro = { fg = palette.fg },
 		PreCondit = { fg = palette.fg },
 		Tag = { fg = palette.fg },
+		htmlTag = { fg = palette.fg },
+		typescriptArrowFuncDef = { fg = palette.fg },
+		typescriptArrowFunc = { fg = palette.fg },
+		tsxTag = { fg = palette.fg },
+		tsxAttrib = { fg = palette.fg },
+		tsxIntrinsicTagName = { fg = palette.fg },
 		SpecialChar = { fg = palette.fg },
 		SpecialComment = { fg = palette.bright_green },
 		Underlined = { fg = palette.fg, underline = true },
@@ -153,7 +160,7 @@ local function apply_colorscheme()
 
 		-- Treesitter
 		["@variable"] = { fg = palette.fg },
-		
+
 		-- LSP Semantic Tokens - all fg
 		["@lsp.type.variable"] = { fg = palette.fg },
 		["@lsp.type.parameter"] = { fg = palette.fg },
@@ -166,8 +173,8 @@ local function apply_colorscheme()
 		["@lsp.type.namespace"] = { fg = palette.fg },
 		["@lsp.type.type"] = { fg = palette.fg },
 		["@lsp.type.keyword"] = { fg = palette.fg },
-		["@lsp.type.string"] = { fg = palette.yellow },
-		["@lsp.type.comment"] = { fg = palette.fg },
+		["@lsp.type.string"] = { fg = palette.dark_teal },
+		["@lsp.type.comment"] = { fg = palette.bright_green },
 		["@lsp.type.builtInConstant"] = { fg = palette.teal },
 	}
 
