@@ -192,11 +192,6 @@ local function apply_colorscheme()
 		vim.api.nvim_set_hl(0, group, settings)
 	end
 
-	-- Force override any remaining white highlights
-	vim.api.nvim_set_hl(0, "Variable", { fg = palette.fg })
-	vim.api.nvim_set_hl(0, "Parameter", { fg = palette.fg })
-	vim.api.nvim_set_hl(0, "Member", { fg = palette.fg })
-
 	-- Set terminal colors
 	if M.config.terminal_colors then
 		vim.g.terminal_color_0 = palette.bg
