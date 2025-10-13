@@ -20,7 +20,7 @@ local colors = {
 	bg_statusline = "#2a3b3b",
 	bg_visual = "#2a4a4a",
 	bg_search = "#3a4a3a",
-	bg_float = "#2B2B02",
+	bg_float = "#1a2b2b",
 }
 
 -- Default config
